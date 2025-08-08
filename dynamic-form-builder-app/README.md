@@ -1,125 +1,162 @@
-# Dynamic-form-builder-app
+Here's a **rewritten and more structured version** of your `README.md` file with improved formatting, clearer sections, and a more professional tone—ideal for documentation or open-source publishing.
 
-A powerful Angular application for creating and managing custom form templates with a drag-and-drop interface, role-based access control, and real-time form validation.
+---
 
-## Features
+# 🧩 Dynamic Form Builder App
 
-### Form Builder Interface
-- Drag-and-drop interface for building forms
-- Support for various field types:
-  - Text input (single-line and multi-line)
-  - Dropdown select
-  - Checkbox groups
-  - Date picker
-  - Radio button groups
-- Configurable field properties:
-  - Field label
-  - Required/optional setting
-  - Help text
-  - Validation rules
+A powerful, extensible Angular 20+ application to create and manage custom form templates through a drag-and-drop interface with real-time validation and role-based access control.
 
-### Form Management
-- List view of created form templates
-- Edit existing templates
-- Preview forms before publishing
+---
 
-### Form Submission
-- User-friendly form filling interface
-- Real-time validation
-- Submission to mock API
-- View submitted form data
+## 🚀 Features
 
-### Authorization
-- Two user roles:
-  - Admin: Create, edit, and delete form templates
-  - User: View and fill out forms
-- Role-based access control
-- Secure login system
+### ✅ Form Builder Interface
 
-## Technical Stack
-- Angular 20+ with TypeScript (zoneless application)
-- NgRx for state management
-- Angular Material for UI components
-- Reactive Forms for form handling
-- Angular CDK for drag-and-drop functionality
+* **Drag-and-drop UI** using Angular CDK
+* **Supports multiple field types**:
 
-## Getting Started
+  * Text (single-line, multi-line)
+  * Dropdown
+  * Checkbox group
+  * Radio buttons
+  * Date picker
+* **Customizable field settings**:
 
-### Prerequisites
-- Node.js (v16 or higher)
-- npm (v7 or higher)
+  * Label, help text
+  * Required/optional toggles
+  * Validation rules
 
-### Installation
-1. Clone the repository
-2. Navigate to the project directory: `cd form-builder-app`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
-5. Open your browser and navigate to `http://localhost:4200`
+### 🗂 Form Management
 
-### Demo Credentials
-- Admin:
-  - Username: admin
-  - Password: password
-- User:
-  - Username: user
-  - Password: password
+* List, edit, delete, and preview form templates
+* Form template versioning (planned)
+* Real-time previews before publishing
 
-## Development
+### 📝 Form Submission
 
-### Development server
-Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+* User-friendly form interface
+* Instant feedback with reactive form validation
+* Submits to mock API
+* View and manage submitted responses
 
-### Build
-Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 🔐 Role-Based Authorization
 
-### Running unit tests
-Run `npm test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-```
+* **Admin**: Create/edit/delete form templates
+* **User**: View/fill forms
+* Secure login
+* Role-based route guards and access control
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🛠 Tech Stack
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Technology       | Purpose                        |
+| ---------------- | ------------------------------ |
+| Angular 20+      | Core framework                 |
+| TypeScript       | Application language           |
+| Angular Material | UI components                  |
+| Angular CDK      | Drag-and-drop API              |
+| NgRx             | State management               |
+| Reactive Forms   | Form creation/validation       |
+| JWT / Mock Auth  | Authentication + Role handling |
+
+---
+
+## 📦 Getting Started
+
+### 🔧 Prerequisites
+
+* Node.js v16 or higher
+* npm v7 or higher
+
+### ⚙️ Installation
 
 ```bash
-ng generate component component-name
+# 1. Clone the repository
+git clone https://github.com/your-username/form-builder-app.git
+
+# 2. Navigate into the project folder
+cd form-builder-app
+
+# 3. Install dependencies
+npm install
+
+# 4. Start the development server
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Then, open your browser at: [http://localhost:4200](http://localhost:4200)
+
+---
+
+## 🧪 Demo Credentials
+
+| Role  | Username | Password   |
+| ----- | -------- | ---------- |
+| Admin | `admin`  | `password` |
+| User  | `user`   | `password` |
+
+---
+
+## 🧱 Development Guide
+
+### ▶️ Run Dev Server
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+Navigate to: [http://localhost:4200](http://localhost:4200)
 
-To build the project run:
+### 🏗️ Build Project
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build artifacts will be stored in the `dist/` folder.
 
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 🧪 Unit Testing
 
 ```bash
-ng test
+npm test
 ```
 
-## Running end-to-end tests
+Runs tests using [Karma](https://karma-runner.github.io).
 
-For end-to-end (e2e) testing, run:
+### 🧪 End-to-End (E2E) Testing
 
 ```bash
 ng e2e
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+> Note: Angular CLI no longer includes an e2e test runner by default. You can integrate Cypress, Playwright, or Protractor as needed.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## ⚙️ Angular CLI Quick Commands
+
+### Generate a Component
+
+```bash
+ng generate component component-name
+```
+
+### List All Schematics
+
+```bash
+ng generate --help
+```
+
+---
+
+## 📚 Resources
+
+* [Angular CLI Docs](https://angular.dev/tools/cli)
+* [NgRx Documentation](https://ngrx.io)
+* [Angular Material](https://material.angular.io)
+* [Angular CDK Drag-and-Drop](https://material.angular.io/cdk/drag-drop/overview)
+
+---
+
+Would you like a downloadable PDF or DOCX version of this new README?
