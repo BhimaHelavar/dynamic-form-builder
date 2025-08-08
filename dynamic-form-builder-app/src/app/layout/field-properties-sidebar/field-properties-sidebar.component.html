@@ -1,0 +1,103 @@
+<div class="field-properties-sidebar">
+  <h3>Field Properties</h3>
+  
+  <form [formGroup]="propertiesForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="outline">
+      <mat-label>Field Label</mat-label>
+      <input matInput formControlName="label" placeholder="Enter field label">
+      <mat-error *ngIf="propertiesForm.get('label')?.hasError('required')">
+        Label is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Field Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter field name">
+      <mat-error *ngIf="propertiesForm.get('name')?.hasError('required')">
+        Name is required
+      </mat-error>
+      <mat-hint>Use for form data reference</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Placeholder</mat-label>
+      <input matInput formControlName="placeholder" placeholder="Enter placeholder text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Help Text</mat-label>
+      <textarea matInput formControlName="helpText" placeholder="Enter help text"></textarea>
+      <mat-hint>Displayed below the field</mat-hint>
+    </mat-form-field>
+
+    <div class="form-field-toggle">
+      <mat-slide-toggle formControlName="required">Required Field</mat-slide-toggle>
+    </div>
+
+    <!-- Field-specific properties -->
+    <ng-container [ngSwitch]="field?.type">
+      <!-- Options for select, radio, checkbox group -->
+      <ng-container *ngSwitchCase="FieldType.SELECT || FieldType.RADIO || FieldType.CHECKBOX_GROUP">
+        <div formArrayName="options" class="options-container">
+          <h4>Options</h4>
+          <div *ngFor="let option of optionsArray.controls; let i = index" [formGroupName]="i" class="option-item">
+            <mat-form-field appearance="outline" class="option-field">
+              <mat-label>Label</mat-label>
+              <input matInput formControlName="label" placeholder="Option label">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="option-field">
+              <mat-label>Value</mat-label>
+              <input matInput formControlName="value" placeholder="Option value">
+            </mat-form-field>
+            <button mat-icon-button color="warn" type="button" (click)="removeOption(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <button mat-stroked-button type="button" color="primary" (click)="addOption()">
+            <mat-icon>add</mat-icon> Add Option
+          </button>
+        </div>
+      </ng-container>
+
+      <!-- Validation rules -->
+      <div class="validation-section">
+        <h4>Validation Rules</h4>
+        <div formArrayName="validation" class="validation-container">
+          <div *ngFor="let rule of validationArray.controls; let i = index" [formGroupName]="i" class="validation-item">
+            <mat-form-field appearance="outline">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type">
+                <mat-option *ngFor="let type of availableValidationTypes" [value]="type.value">
+                  {{ type.label }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" *ngIf="showValueInput(rule.value.type)">
+              <mat-label>Value</mat-label>
+              <input matInput formControlName="value" [type]="getValueInputType(rule.value.type)">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Error Message</mat-label>
+              <input matInput formControlName="message" placeholder="Error message">
+            </mat-form-field>
+
+            <button mat-icon-button color="warn" type="button" (click)="removeValidation(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <button mat-stroked-button type="button" color="primary" (click)="addValidation()">
+            <mat-icon>add</mat-icon> Add Validation
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="propertiesForm.invalid">
+        Update Field
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,69 @@
+<div class="container d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="card shadow-sm p-4 w-100" style="max-width: 400px;">
+    <h3 class="text-center mb-4"> Dynamic form Builder App </h3>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <!-- UserName -->
+      <div class="mb-3">
+        <label for="email" class="form-label"> User Name </label>
+        <input placeholder="Enter your user name" type="email" id="email" name="email" class="form-control"
+          formControlName="username" required />
+
+        @if(loginForm.get('username')?.hasError('required')) {
+        <small hasError="required" class="text-danger">
+          User name is required
+        </small>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="password" class="form-label"> Password </label>
+        <input placeholder="Enter your password" type="password" id="password" name="password" class="form-control"
+          formControlName="password" required />
+        @if(loginForm.get('password')?.hasError('required')) {
+        <small hasError="required" class="text-danger">
+          Password is required
+        </small>
+        }
+      </div>
+
+      <!-- Role Selection -->
+      <div class="mb-3">
+        <label for="role" class="form-label">Role</label>
+        <select id="role" name="role" class="form-select" formControlName="role" required>
+          <option value="" disabled selected>Select your role</option>
+          <option value="admin">Admin</option>
+          <option value="user">User</option>
+        </select>
+
+        @if(loginForm.get('role')?.hasError('required')) {
+        <small hasError="required" class="text-danger">
+          Role is required
+        </small>
+        }
+      </div>
+
+      <div class="form-text mb-3">
+        <strong>Admin:</strong> Can create, edit, and delete form templates<br>
+        <strong>User:</strong> Can only view and fill out forms
+      </div>
+
+      <!-- Login Button -->
+      <div class="d-grid">
+        <button class="btn btn-primary" [disabled]="loginForm.invalid || (loading$ | async)" type="submit">
+          Login
+        </button>
+      </div>
+    </form>
+    <hr>
+    <!-- 🔵 Auto-scrolling banner -->
+    <div class="bg-info text-white py-2 overflow-hidden position-relative">
+      <div class="scrolling-text px-3">
+        Admin Credentials ➡️ Username: admin, Password: admin123. &nbsp;&nbsp;&nbsp;
+        User Credentials ➡️ Username: user, Password: user123
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<div class="dashboard-container container-xl">
+  <div class="dashboard-header">
+    <h1> Form Builder Dashboard </h1>
+
+    @if(isAdmin$ | async){
+    <button mat-raised-button color="primary" routerLink="/forms/new">
+      <mat-icon>add</mat-icon> Create New Form
+    </button>
+    }
+  </div>
+
+  <div class="dashboard-content">
+    <ng-container *ngIf="loading$ | async">
+      <div class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading forms...</p>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!(loading$ | async)">
+      <div *ngIf="(templates$ | async)?.length === 0" class="no-forms-message">
+        <mat-icon>assignment</mat-icon>
+        <h2>No forms available</h2>
+        <p *ngIf="isAdmin$ | async">Get started by creating your first form</p>
+        <p *ngIf="!(isAdmin$ | async)">No forms have been created yet</p>
+        <button mat-raised-button color="primary" routerLink="/forms/new" *ngIf="isAdmin$ | async">
+          Create Form
+        </button>
+      </div>
+
+      @if((templates$ | async)?.length !== 0) {
+        <div class="forms-list">
+          <div>
+            @for (template of templates$ | async; track template.id) {
+              <mat-card class="form-card">
+                <mat-card-header>
+                  <mat-card-title>{{ template.name }}</mat-card-title>
+                  <mat-card-subtitle>
+                    {{ template.fields.length }} fields • Created {{ template.createdAt | date }}
+                  </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  @if(template.description) {
+                    <p>{{ template.description }}</p>
+                  } @else {
+                    <p class="no-description">No description provided</p>
+                  }
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-button color="primary" (click)="viewForm(template.id)">
+                    <mat-icon>visibility</mat-icon> View
+                  </button>
+                  
+                  @if(isAdmin$ | async) {
+                    <button mat-button color="primary" (click)="editForm(template.id)">
+                      <mat-icon>edit</mat-icon> Edit
+                    </button>
+
+                    <button mat-button color="warn" (click)="deleteForm(template.id)">
+                      <mat-icon>delete</mat-icon> Delete
+                    </button>
+                  }
+                </mat-card-actions>
+              </mat-card>
+            }
+          </div>
+        </div>
+      }
+    </ng-container>
+  </div>
+</div>

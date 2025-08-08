@@ -1,0 +1,43 @@
+
+<div class="container my-5">
+  <div class="card shadow-sm p-4">
+    <h4 class="mb-4"> Build New Form </h4>
+
+    <form [formGroup]="formDetailsForm">
+      <!-- Submit Button -->
+      <div class="mb-3" style="float:right;">
+        <button type="submit" class="btn btn-primary btn-space" (click)="saveForm()"
+          [disabled]="formDetailsForm.invalid || (loading$ | async)">
+          Save Form
+        </button>
+        <button type="button" class="btn btn-secondary btn-space" (click)="cancelForm()"> Cancel </button>
+      </div>
+
+      <!-- Form Name -->
+      <div class="mb-3">
+        <label for="formName" class="form-label"> Form Name </label>
+        <input type="text" class="form-control" id="formName" name="formName" formControlName="name" required
+          placeholder="Enter form title" />
+        @if(formDetailsForm.get('name')?.hasError('required') && formDetailsForm.get('name')?.hasError('tuched') ) {
+        <small hasError="required" class="text-danger">
+          Form Name is required
+        </small>
+        }
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" name="description" class="form-control" rows="4" formControlName="description"
+          placeholder="Enter form description"></textarea>
+
+        @if(formDetailsForm.get('description')?.hasError('minlength')) {
+        <small hasError="required" class="text-danger">
+          Description is required
+        </small>
+        }
+      </div>
+       <app-form-builder (formFieldsUpdated)="onFormFieldsUpdated($event)"></app-form-builder>
+    </form>
+  </div>
+</div>

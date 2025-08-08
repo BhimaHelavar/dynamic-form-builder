@@ -1,0 +1,67 @@
+.dashboard-container {  
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  padding-top: 2rem;
+  background-color: beige;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.form-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: cornsilk;
+}
+
+.form-card mat-card-content {
+  flex: 1;
+}
+
+.form-card mat-card-actions {
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.loading-container p {
+  margin-top: 16px;
+}
+
+.no-forms-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  text-align: center;
+}
+
+.no-forms-message mat-icon {
+  font-size: 64px;
+  height: 64px;
+  width: 64px;
+  margin-bottom: 16px;
+  color: #888;
+}
+
+.no-description {
+  color: #888;
+  font-style: italic;
+}

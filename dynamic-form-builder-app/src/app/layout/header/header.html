@@ -1,0 +1,34 @@
+<mat-toolbar style="background-color: #9ec36b;" class="toolbar">
+  <span> Dynamic Form Builder App </span>
+
+  <span class="toolbar-spacer"></span>
+
+  @if (isAuthenticated$ | async) {
+
+  <div>
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <span class="material-icons"> account_circle </span>
+      {{ (currentUser$ | async)?.username }}
+      <span class="material-icons"> arrow_drop_down </span>
+    </button>
+    <mat-menu #userMenu="matMenu">
+      <button mat-menu-item disabled>
+        <span class="material-icons"> verified_user </span> 
+        Role: {{ (currentUser$ | async)?.role }}
+      </button>
+      <button mat-menu-item (click)="logout()">
+        <span class="material-icons"> exit_to_app </span>
+        Logout
+      </button>
+    </mat-menu>
+  </div>
+  } @else{
+  <div>
+    <button mat-button routerLink="/login">
+      <span class="material-icons">login</span>
+      Login
+    </button>
+  </div>
+  }
+
+</mat-toolbar>

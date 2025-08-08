@@ -1,0 +1,78 @@
+<div class="field-preview">
+  <ng-container [ngSwitch]="field.type">
+    <!-- Text Input -->
+    <ng-container *ngSwitchCase="FieldType.TEXT">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ field.label }}</mat-label>
+        <input matInput [placeholder]="field.placeholder || ''" [required]="field.required">
+        <mat-hint *ngIf="field.helpText">{{ field.helpText }}</mat-hint>
+      </mat-form-field>
+    </ng-container>
+
+    <!-- Textarea -->
+    <ng-container *ngSwitchCase="FieldType.TEXTAREA">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ field.label }}</mat-label>
+        <textarea matInput [placeholder]="field.placeholder || ''" [required]="field.required"></textarea>
+        <mat-hint *ngIf="field.helpText">{{ field.helpText }}</mat-hint>
+      </mat-form-field>
+    </ng-container>
+    <!-- Select / Dropdown -->
+    <ng-container *ngSwitchCase="FieldType.SELECT">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ field.label }}</mat-label>
+        <mat-select [required]="field.required">
+          <mat-option *ngFor="let option of field.options" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+        <mat-hint *ngIf="field.helpText">{{ field.helpText }}</mat-hint>
+      </mat-form-field>
+    </ng-container>
+
+    <!-- Checkbox -->
+    <ng-container *ngSwitchCase="FieldType.CHECKBOX">
+      <div class="checkbox-field">
+        <mat-checkbox [required]="field.required">{{ field.label }}</mat-checkbox>
+        <div class="field-hint" *ngIf="field.helpText">{{ field.helpText }}</div>
+      </div>
+    </ng-container>
+
+    <!-- Radio Group -->
+    <ng-container *ngSwitchCase="FieldType.RADIO">
+      <div class="radio-group-field">
+        <label class="field-label">{{ field.label }}</label>
+        <mat-radio-group class="radio-group">
+          <mat-radio-button *ngFor="let option of field.options" [value]="option.value">
+            {{ option.label }}
+          </mat-radio-button>
+        </mat-radio-group>
+        <div class="field-hint" *ngIf="field.helpText">{{ field.helpText }}</div>
+      </div>
+    </ng-container>
+
+    <!-- Checkbox Group -->
+    <ng-container *ngSwitchCase="FieldType.CHECKBOX_GROUP">
+      <div class="checkbox-group-field">
+        <label class="field-label">{{ field.label }}</label>
+        <div class="checkbox-group">
+          <mat-checkbox *ngFor="let option of field.options" [value]="option.value">
+            {{ option.label }}
+          </mat-checkbox>
+        </div>
+        <div class="field-hint" *ngIf="field.helpText">{{ field.helpText }}</div>
+      </div>
+    </ng-container>
+
+    <!-- Date Picker -->
+    <ng-container *ngSwitchCase="FieldType.DATE">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>{{ field.label }}</mat-label>
+        <input matInput [matDatepicker]="picker" [placeholder]="field.placeholder || ''" [required]="field.required">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint *ngIf="field.helpText">{{ field.helpText }}</mat-hint>
+      </mat-form-field>
+    </ng-container>
+  </ng-container>
+</div>

@@ -1,0 +1,86 @@
+<div class="form-builder-container">
+  <div class="field-palette">
+    <h3>Form Elements</h3>
+    <div 
+      cdkDropList
+      id="field-palette-list"
+      [cdkDropListData]="fieldPaletteItems"
+      [cdkDropListConnectedTo]="['form-fields-container']"
+      cdkDropListSortingDisabled="true"
+      class="field-buttons"
+    >
+      @for (fieldType of fieldPaletteItems; track fieldType) {
+        <div 
+          cdkDrag
+          [cdkDragData]="fieldType"
+          class="field-palette-item"
+        >
+          <div class="palette-item-content">
+            <span class="material-icons">{{getIconForFieldType(fieldType)}}</span>
+            <span>{{getLabelForFieldType(fieldType)}}</span>
+          </div>
+          <div *cdkDragPreview class="palette-drag-preview">
+            <span class="material-icons">{{getIconForFieldType(fieldType)}}</span>
+            <span>{{getLabelForFieldType(fieldType)}}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="form-canvas">
+    <div class="form-header">
+      <h2>Form Builder</h2>
+      <div class="form-actions">
+        <button mat-raised-button color="primary" (click)="saveForm()">
+          <mat-icon>save</mat-icon> Save Form
+        </button>
+        <button mat-raised-button color="accent" (click)="previewForm()">
+          <mat-icon>visibility</mat-icon> Preview Form
+        </button>
+      </div>
+    </div>
+
+    <div 
+      cdkDropList 
+      id="form-fields-container"
+      [cdkDropListData]="formFields" 
+      (cdkDropListDropped)="dropField($event)"
+      [cdkDropListConnectedTo]="['field-palette-list']"
+      class="form-fields-container"
+    >
+      <div *ngIf="formFields.length === 0" class="empty-form-message">
+        <span class="material-icons">arrow_upward</span>
+        <p>Drag elements from the palette to build your form</p>
+      </div>
+
+      @for (field of formFields; let $ind = $index; track field.id) {
+        <div 
+          cdkDrag 
+          [cdkDragData]="field"
+          class="form-field-item"
+          [class.selected]="selectedField?.id === field.id"
+          (click)="selectField(field)"
+        >
+          <div class="field-drag-handle" cdkDragHandle>
+            <span class="material-icons">drag_indicator</span>
+          </div>
+          <div class="field-content">
+            <app-field-preview [field]="field"></app-field-preview>
+          </div>
+          <div class="field-actions">
+            <button mat-icon-button color="warn" (click)="removeField(field.id); $event.stopPropagation()">
+              <span class="material-icons">delete</span>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <app-field-properties-sidebar 
+    *ngIf="selectedField" 
+    [field]="selectedField"
+    (fieldUpdated)="updateField($event)"
+  ></app-field-properties-sidebar>
+</div>
